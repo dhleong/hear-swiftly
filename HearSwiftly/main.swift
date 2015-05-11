@@ -8,5 +8,12 @@
 
 import Foundation
 
-println("Hello, World!")
+var mgr = VoiceManager()
+mgr.find(byName: "Alex")?.speak("Hello world!")
+mgr.find(byName: "Vicki")?.speak("Queued speech!")
 
+var voices = mgr.voices.map({ $0.name })
+println("voices: \(voices)")
+do {
+    sleep(1)
+} while (true)
