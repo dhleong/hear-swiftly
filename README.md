@@ -12,7 +12,6 @@ CoreFramework cruft and providing the interface you always wanted
 
 ```swift
 var mgr = VoiceManager()
-var vicki = 
 mgr.find(byName: "Alex")?.speak("Would you like fries with that?")
 mgr.find(byName: "Vicki")?.speak("Why, yes I would!")
 ```
