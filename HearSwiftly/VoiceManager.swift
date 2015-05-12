@@ -5,6 +5,10 @@
 //  Created by Daniel Leong on 5/11/15.
 //  Copyright (c) 2015 Dan Leong Apps. All rights reserved.
 //
+//   We don't use NSSpeechSynthesizer because its delegate's
+//    didFinishSpeaking callback only fires when the feedback
+//    window is shown, which is incredibly ridiculous
+//
 
 import Cocoa
 
@@ -16,6 +20,7 @@ struct Utterance {
 public class Voice {
     
     public let name: String
+    public let lang: String?
     
     internal var spec: VoiceSpec
     
@@ -23,10 +28,13 @@ public class Voice {
     private var mgr: VoiceManager
     private var channel: SpeechChannel?
     
-    private init(from spec: VoiceSpec, withName name: String, withMgr mgr: VoiceManager) {
+    private init(from spec: VoiceSpec, withName name: String,
+        withLang lang: String?,
+        withMgr mgr: VoiceManager) {
         self.spec = spec
         self.name = name
         self.mgr = mgr
+        self.lang = lang
     }
     
     public func speak(message: String) {
@@ -79,6 +87,7 @@ public class Voice {
 public class VoiceManager {
     
     public var voices: [Voice] = [];
+    private var defaultVoiceObj: Voice?
     
     var curSpeechChannel: SpeechChannel? = SpeechChannel();
     
@@ -92,7 +101,32 @@ public class VoiceManager {
             NSLog("Error! \(theErr)")
             return;
         }
-        
+
+        // NB: The Carbon API has some opaque Int describing the
+        //  language and region, so we need the Cocoa API; the
+        //  Cocoa API has crappy callback semantics, however, so
+        //  we just use it for its information
+        var nsVoices = NSSpeechSynthesizer.availableVoices()
+        var nsDefaultVoice = NSSpeechSynthesizer.defaultVoice()
+        var voiceLanguagesByName = [String:String]()
+        var voiceIdsByName = [String:String]()
+
+        if let voices = nsVoices {
+            for voice in voices {
+                var attributes = NSSpeechSynthesizer.attributesForVoice(voice as! String)
+//                var name = attributes[NSVoiceName as! NSObject]
+                var name = attributes?[NSVoiceName] as! String?
+                var lang = attributes?[NSVoiceLocaleIdentifier] as! String?
+                if let key = name, val = lang {
+                    voiceLanguagesByName[key] = val
+                }
+                
+                if let key = name {
+                    voiceIdsByName[key] = voice as? String
+                }
+            }
+        }
+
         var voiceSpec: VoiceSpec = VoiceSpec();
         for i in 1...numOfVoices {
             theErr = GetIndVoice(i, &voiceSpec)
@@ -111,7 +145,19 @@ public class VoiceManager {
             var nssName = cfsName as NSString
             var name: String = nssName as String
             
-            voices.append(Voice(from: voiceSpec, withName: name, withMgr: self))
+            if let compactRange = name.rangeOfString(" Compact") {
+                name.removeRange(compactRange)
+            }
+            
+            var lang = voiceLanguagesByName[name]
+            voices.append(Voice(from: voiceSpec,
+                withName: name,
+                withLang: lang,
+                withMgr: self))
+            
+            if nsDefaultVoice == voiceIdsByName[name] {
+                defaultVoiceObj = voices.last!
+            }
         }
     }
 
@@ -119,8 +165,36 @@ public class VoiceManager {
         voices.map { $0.dispose() }
     }
     
+    public func defaultVoice() -> Voice {
+        if let found = defaultVoiceObj {
+            return found
+        }
+        
+        return anyVoice()
+    }
+    
+    /// Pick any random voice, possibly filtered by language.
+    ///  The language is specified as a region string, eg: en_US
+    public func anyVoice(forLang: String? = nil) -> Voice {
+        var voices: [Voice]
+        if let lang = forLang {
+            voices = self.voices.filter { $0.lang == lang }
+        } else {
+            voices = self.voices // all
+        }
+        
+        var randomIndex = arc4random_uniform(UInt32(voices.count))
+        return voices[Int(randomIndex)]
+    }
+    
     public func find(byName name: String) -> Voice? {
         return voices.filter({ $0.name == name }).first
+    }
+    
+    /// Convenience method to utter the `text` using the 
+    ///  default voice
+    public func speak(text: String) {
+        defaultVoice().speak(text)
     }
 
     func onSpeechFinished(previousVoice: Voice) {
