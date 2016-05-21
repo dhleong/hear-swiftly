@@ -9,6 +9,8 @@
 import Cocoa
 import Foundation
 
+import HearSwiftly
+
 var mgr = VoiceManager()
 mgr.find(byName: "Alex")?.speak("Hello world!")
 mgr.anyVoice("en_US").speak("Queued speech!")

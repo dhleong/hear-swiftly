@@ -9,7 +9,20 @@
 /* Begin PBXBuildFile section */
 		B6697EDB1B0142F500D90991 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6697EDA1B0142F500D90991 /* main.swift */; };
 		B6697EE21B01431A00D90991 /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6697EE11B01431A00D90991 /* VoiceManager.swift */; };
+		B68996D71CF0E225008010AE /* HearSwiftly.h in Headers */ = {isa = PBXBuildFile; fileRef = B68996D61CF0E225008010AE /* HearSwiftly.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B68996DE1CF0E225008010AE /* HearSwiftly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B68996D41CF0E225008010AE /* HearSwiftly.framework */; };
+		B68996E31CF0E225008010AE /* HearSwiftlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68996E21CF0E225008010AE /* HearSwiftlyTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B68996DF1CF0E225008010AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6697ECF1B0142F500D90991 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B68996D31CF0E225008010AE;
+			remoteInfo = HearSwiftly;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B6697ED51B0142F500D90991 /* CopyFiles */ = {
@@ -24,9 +37,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B6697ED71B0142F500D90991 /* HearSwiftly */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HearSwiftly; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6697ED71B0142F500D90991 /* HearSwiftlySample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HearSwiftlySample; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6697EDA1B0142F500D90991 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B6697EE11B01431A00D90991 /* VoiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
+		B68996D41CF0E225008010AE /* HearSwiftly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HearSwiftly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B68996D61CF0E225008010AE /* HearSwiftly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HearSwiftly.h; sourceTree = "<group>"; };
+		B68996D81CF0E225008010AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B68996DD1CF0E225008010AE /* HearSwiftlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HearSwiftlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B68996E21CF0E225008010AE /* HearSwiftlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearSwiftlyTests.swift; sourceTree = "<group>"; };
+		B68996E41CF0E225008010AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,13 +56,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B68996D01CF0E225008010AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B68996DA1CF0E225008010AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B68996DE1CF0E225008010AE /* HearSwiftly.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B6697ECE1B0142F500D90991 = {
 			isa = PBXGroup;
 			children = (
-				B6697ED91B0142F500D90991 /* HearSwiftly */,
+				B68996D51CF0E225008010AE /* HearSwiftly */,
+				B68996E11CF0E225008010AE /* HearSwiftlyTests */,
+				B6697ED91B0142F500D90991 /* HearSwiftlySample */,
 				B6697ED81B0142F500D90991 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,26 +87,58 @@
 		B6697ED81B0142F500D90991 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B6697ED71B0142F500D90991 /* HearSwiftly */,
+				B6697ED71B0142F500D90991 /* HearSwiftlySample */,
+				B68996D41CF0E225008010AE /* HearSwiftly.framework */,
+				B68996DD1CF0E225008010AE /* HearSwiftlyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B6697ED91B0142F500D90991 /* HearSwiftly */ = {
+		B6697ED91B0142F500D90991 /* HearSwiftlySample */ = {
 			isa = PBXGroup;
 			children = (
 				B6697EDA1B0142F500D90991 /* main.swift */,
+			);
+			name = HearSwiftlySample;
+			path = HearSwiftly;
+			sourceTree = "<group>";
+		};
+		B68996D51CF0E225008010AE /* HearSwiftly */ = {
+			isa = PBXGroup;
+			children = (
 				B6697EE11B01431A00D90991 /* VoiceManager.swift */,
+				B68996D61CF0E225008010AE /* HearSwiftly.h */,
+				B68996D81CF0E225008010AE /* Info.plist */,
 			);
 			path = HearSwiftly;
 			sourceTree = "<group>";
 		};
+		B68996E11CF0E225008010AE /* HearSwiftlyTests */ = {
+			isa = PBXGroup;
+			children = (
+				B68996E21CF0E225008010AE /* HearSwiftlyTests.swift */,
+				B68996E41CF0E225008010AE /* Info.plist */,
+			);
+			path = HearSwiftlyTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		B68996D11CF0E225008010AE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B68996D71CF0E225008010AE /* HearSwiftly.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		B6697ED61B0142F500D90991 /* HearSwiftly */ = {
+		B6697ED61B0142F500D90991 /* HearSwiftlySample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B6697EDE1B0142F500D90991 /* Build configuration list for PBXNativeTarget "HearSwiftly" */;
+			buildConfigurationList = B6697EDE1B0142F500D90991 /* Build configuration list for PBXNativeTarget "HearSwiftlySample" */;
 			buildPhases = (
 				B6697ED31B0142F500D90991 /* Sources */,
 				B6697ED41B0142F500D90991 /* Frameworks */,
@@ -80,10 +148,46 @@
 			);
 			dependencies = (
 			);
+			name = HearSwiftlySample;
+			productName = HearSwiftly;
+			productReference = B6697ED71B0142F500D90991 /* HearSwiftlySample */;
+			productType = "com.apple.product-type.tool";
+		};
+		B68996D31CF0E225008010AE /* HearSwiftly */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B68996E51CF0E225008010AE /* Build configuration list for PBXNativeTarget "HearSwiftly" */;
+			buildPhases = (
+				B68996CF1CF0E225008010AE /* Sources */,
+				B68996D01CF0E225008010AE /* Frameworks */,
+				B68996D11CF0E225008010AE /* Headers */,
+				B68996D21CF0E225008010AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
 			name = HearSwiftly;
 			productName = HearSwiftly;
-			productReference = B6697ED71B0142F500D90991 /* HearSwiftly */;
-			productType = "com.apple.product-type.tool";
+			productReference = B68996D41CF0E225008010AE /* HearSwiftly.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B68996DC1CF0E225008010AE /* HearSwiftlyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B68996E81CF0E225008010AE /* Build configuration list for PBXNativeTarget "HearSwiftlyTests" */;
+			buildPhases = (
+				B68996D91CF0E225008010AE /* Sources */,
+				B68996DA1CF0E225008010AE /* Frameworks */,
+				B68996DB1CF0E225008010AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B68996E01CF0E225008010AE /* PBXTargetDependency */,
+			);
+			name = HearSwiftlyTests;
+			productName = HearSwiftlyTests;
+			productReference = B68996DD1CF0E225008010AE /* HearSwiftlyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -99,6 +203,12 @@
 					B6697ED61B0142F500D90991 = {
 						CreatedOnToolsVersion = 6.3.1;
 					};
+					B68996D31CF0E225008010AE = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					B68996DC1CF0E225008010AE = {
+						CreatedOnToolsVersion = 7.3;
+					};
 				};
 			};
 			buildConfigurationList = B6697ED21B0142F500D90991 /* Build configuration list for PBXProject "HearSwiftly" */;
@@ -113,10 +223,29 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B6697ED61B0142F500D90991 /* HearSwiftly */,
+				B68996D31CF0E225008010AE /* HearSwiftly */,
+				B6697ED61B0142F500D90991 /* HearSwiftlySample */,
+				B68996DC1CF0E225008010AE /* HearSwiftlyTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B68996D21CF0E225008010AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B68996DB1CF0E225008010AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B6697ED31B0142F500D90991 /* Sources */ = {
@@ -128,7 +257,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B68996CF1CF0E225008010AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B68996D91CF0E225008010AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B68996E31CF0E225008010AE /* HearSwiftlyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B68996E01CF0E225008010AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B68996D31CF0E225008010AE /* HearSwiftly */;
+			targetProxy = B68996DF1CF0E225008010AE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B6697EDC1B0142F500D90991 /* Debug */ = {
@@ -224,6 +376,82 @@
 			};
 			name = Release;
 		};
+		B68996E61CF0E225008010AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = HearSwiftly/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dhleong.HearSwiftly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B68996E71CF0E225008010AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = HearSwiftly/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dhleong.HearSwiftly;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B68996E91CF0E225008010AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = HearSwiftlyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dhleong.HearSwiftlyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B68996EA1CF0E225008010AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = HearSwiftlyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dhleong.HearSwiftlyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -236,7 +464,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B6697EDE1B0142F500D90991 /* Build configuration list for PBXNativeTarget "HearSwiftly" */ = {
+		B6697EDE1B0142F500D90991 /* Build configuration list for PBXNativeTarget "HearSwiftlySample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B6697EDF1B0142F500D90991 /* Debug */,
@@ -244,6 +472,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B68996E51CF0E225008010AE /* Build configuration list for PBXNativeTarget "HearSwiftly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B68996E61CF0E225008010AE /* Debug */,
+				B68996E71CF0E225008010AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B68996E81CF0E225008010AE /* Build configuration list for PBXNativeTarget "HearSwiftlyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B68996E91CF0E225008010AE /* Debug */,
+				B68996EA1CF0E225008010AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
