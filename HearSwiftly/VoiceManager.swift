@@ -28,9 +28,7 @@ public class Voice {
     private var mgr: VoiceManager
     private var channel: SpeechChannel?
     
-    private init(from spec: VoiceSpec, withName name: String,
-        withLang lang: String?,
-        withMgr mgr: VoiceManager) {
+    private init(from spec: VoiceSpec, withName name: String, withLang lang: String?, withMgr mgr: VoiceManager) {
         self.spec = spec
         self.name = name
         self.mgr = mgr
@@ -54,10 +52,10 @@ public class Voice {
     /// Called by VoiceManager when it's our turn to talk
     func performSpeech(utterance: Utterance) {
         
-        var nsText = utterance.text as NSString
-        var text: CFString = nsText as CFString
+        let nsText = utterance.text as NSString
+        let text: CFString = nsText as CFString
         
-        var channel = prepareChannel()
+        let channel = prepareChannel()
         SpeakCFString(channel, text, nil) // TODO options
     }
     
@@ -66,7 +64,7 @@ public class Voice {
             return chan
         }
         
-        var bridge: @objc_block (SpeechChannel, Int) -> Void =
+        let bridge: @convention(block) (SpeechChannel, Int) -> Void =
         { (chan, _) in
             self.mgr.onSpeechFinished(self)
         }
@@ -74,11 +72,11 @@ public class Voice {
         var callbackUPP = unsafeBitCast(bridgeBlock!, SpeechDoneUPP.self)
         
         // this hack discovered here: http://stackoverflow.com/a/17685620
-        var callback = CFNumberCreate(nil, CFNumberType.LongType, &callbackUPP)
+        let callback = CFNumberCreate(nil, CFNumberType.LongType, &callbackUPP)
         
-        var chan = SpeechChannel()
+        var chan:SpeechChannel = nil
         NewSpeechChannel(&spec, &chan)
-        SetSpeechProperty(chan, kSpeechSpeechDoneCallBack.takeRetainedValue(), callback)
+        SetSpeechProperty(chan, kSpeechSpeechDoneCallBack, callback)
         channel = chan
         return chan
     }
@@ -89,7 +87,7 @@ public class VoiceManager {
     public var voices: [Voice] = [];
     private var defaultVoiceObj: Voice?
     
-    var curSpeechChannel: SpeechChannel? = SpeechChannel();
+    var curSpeechChannel: SpeechChannel? = nil
     
     private var queue: [Utterance] = []
     private var isSpeaking = false
@@ -106,24 +104,22 @@ public class VoiceManager {
         //  language and region, so we need the Cocoa API; the
         //  Cocoa API has crappy callback semantics, however, so
         //  we just use it for its information
-        var nsVoices = NSSpeechSynthesizer.availableVoices()
-        var nsDefaultVoice = NSSpeechSynthesizer.defaultVoice()
+        let nsVoices = NSSpeechSynthesizer.availableVoices()
+        let nsDefaultVoice = NSSpeechSynthesizer.defaultVoice()
         var voiceLanguagesByName = [String:String]()
         var voiceIdsByName = [String:String]()
 
-        if let voices = nsVoices {
-            for voice in voices {
-                var attributes = NSSpeechSynthesizer.attributesForVoice(voice as! String)
-//                var name = attributes[NSVoiceName as! NSObject]
-                var name = attributes?[NSVoiceName] as! String?
-                var lang = attributes?[NSVoiceLocaleIdentifier] as! String?
-                if let key = name, val = lang {
-                    voiceLanguagesByName[key] = val
-                }
-                
-                if let key = name {
-                    voiceIdsByName[key] = voice as? String
-                }
+        for voice in nsVoices {
+            
+            let attributes = NSSpeechSynthesizer.attributesForVoice(voice)
+            let name = attributes[NSVoiceName] as! String?
+            let lang = attributes[NSVoiceLocaleIdentifier] as! String?
+            if let key = name, val = lang {
+                voiceLanguagesByName[key] = val
+            }
+            
+            if let key = name {
+                voiceIdsByName[key] = voice
             }
         }
 
@@ -141,15 +137,15 @@ public class VoiceManager {
             }
             
             // dance dance dance
-            var cfsName = CFStringCreateWithPascalString(nil, &voiceDesc.name.0, kCFStringEncodingASCII)
-            var nssName = cfsName as NSString
+            let cfsName = CFStringCreateWithPascalString(nil, &voiceDesc.name.0, kCFStringEncodingASCII)
+            let nssName = cfsName as NSString
             var name: String = nssName as String
             
             if let compactRange = name.rangeOfString(" Compact") {
                 name.removeRange(compactRange)
             }
             
-            var lang = voiceLanguagesByName[name]
+            let lang = voiceLanguagesByName[name]
             voices.append(Voice(from: voiceSpec,
                 withName: name,
                 withLang: lang,
@@ -162,7 +158,7 @@ public class VoiceManager {
     }
 
     public func dispose() {
-        voices.map { $0.dispose() }
+        voices.forEach { $0.dispose() }
     }
     
     public func defaultVoice() -> Voice {
@@ -183,7 +179,7 @@ public class VoiceManager {
             voices = self.voices // all
         }
         
-        var randomIndex = arc4random_uniform(UInt32(voices.count))
+        let randomIndex = arc4random_uniform(UInt32(voices.count))
         return voices[Int(randomIndex)]
     }
     

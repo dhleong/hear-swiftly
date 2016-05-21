@@ -11,11 +11,11 @@ import Foundation
 
 var mgr = VoiceManager()
 mgr.find(byName: "Alex")?.speak("Hello world!")
-mgr.anyVoice(forLang: "en_US").speak("Queued speech!")
+mgr.anyVoice("en_US").speak("Queued speech!")
 mgr.speak("Awesome!")
 
 var voices = mgr.voices.map({ "name=\($0.name); lang=\($0.lang)\n" })
-println("voices: \(voices)")
-do {
+print("voices: \(voices)")
+repeat {
     sleep(1)
 } while (true)
